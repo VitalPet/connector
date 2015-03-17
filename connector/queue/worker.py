@@ -19,6 +19,7 @@
 #
 ##############################################################################
 
+import re
 import logging
 import os
 import threading
@@ -58,13 +59,13 @@ class Worker(threading.Thread):
     queue_class = JobsQueue
     job_storage_class = OpenERPJobStorage
 
-    def __init__(self, db_name, watcher):
+    def __init__(self, db_name, watcher_):
         super(Worker, self).__init__()
         self.queue = self.queue_class()
         self.db_name = db_name
         threading.current_thread().dbname = db_name
         self.uuid = unicode(uuid.uuid4())
-        self.watcher = watcher
+        self.watcher = watcher_
 
     def run_job(self, job):
         """ Execute a job """
@@ -265,6 +266,9 @@ class WorkerWatcher(threading.Thread):
                 db_names = services['db'].exp_list(True)
             else:
                 db_names = []
+        dbfilter = config['dbfilter']
+        if dbfilter and db_names:
+            db_names = [d for d in db_names if re.match(dbfilter, d)]
         available_db_names = []
         for db_name in db_names:
             session_hdl = ConnectorSessionHandler(db_name,

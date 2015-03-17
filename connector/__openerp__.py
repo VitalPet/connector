@@ -21,8 +21,9 @@
 
 {'name': 'Connector',
  'version': '2.2.0',
- 'author': 'Openerp Connector Core Editors',
- 'website': 'http://openerp-connector.com',
+ 'author': "Camptocamp,Openerp Connector Core Editors,"
+           "Odoo Community Association (OCA)",
+ 'website': 'http://odoo-connector.com',
  'license': 'AGPL-3',
  'category': 'Generic Modules',
  'description': """
@@ -32,7 +33,7 @@ Connector
 This is a framework designed to build connectors with external systems,
 usually called `Backends`.
 
-Documentation: http://openerp-connector.com
+Documentation: http://odoo-connector.com
 
 It features:
 
@@ -64,7 +65,7 @@ It features:
 
 It is actually used to connect Magento_ and Prestashop_
 
-.. _Magento: http://openerp-magento-connector.com
+.. _Magento: http://odoo-magento-connector.com
 .. _Prestashop: https://launchpad.net/prestashoperpconnect
 """,
  'depends': ['mail'
